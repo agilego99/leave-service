@@ -22,21 +22,21 @@ public class LeaveApi {
     LeaveApplicationService leaveApplicationService;
 
     @PostMapping
-    public Response createLeaveInfo(LeaveDTO leaveDTO){
+    public Response createLeaveInfo(@RequestBody LeaveDTO leaveDTO){
         Leave leave = LeaveAssembler.toDO(leaveDTO);
         leaveApplicationService.createLeaveInfo(leave);
         return Response.ok();
     }
 
     @PutMapping
-    public Response updateLeaveInfo(LeaveDTO leaveDTO){
+    public Response updateLeaveInfo(@RequestBody LeaveDTO leaveDTO){
         Leave leave = LeaveAssembler.toDO(leaveDTO);
         leaveApplicationService.updateLeaveInfo(leave);
         return Response.ok();
     }
 
     @PostMapping("/submit")
-    public Response submitApproval(LeaveDTO leaveDTO){
+    public Response submitApproval(@RequestBody LeaveDTO leaveDTO){
         Leave leave = LeaveAssembler.toDO(leaveDTO);
         leaveApplicationService.submitApproval(leave);
         return Response.ok();

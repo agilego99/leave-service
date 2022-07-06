@@ -3,6 +3,7 @@ package ddd.leave.domain.person.repository.persistence;
 import ddd.leave.domain.person.repository.po.PersonPO;
 import ddd.leave.domain.person.repository.facade.PersonRepository;
 import ddd.leave.domain.person.repository.mapper.PersonDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,8 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     @Override
     public PersonPO findById(String id) {
-        return personDao.findById(id).orElseThrow(() -> new RuntimeException("未找到用户"));
+        return  personDao.findById(id).orElse(null) ;
+//      return personDao.findById(id).orElseThrow(() -> new RuntimeException("未找到用户"));
     }
 
     @Override

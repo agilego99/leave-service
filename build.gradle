@@ -1,0 +1,71 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.8.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	//id 'name.remal.sonarlint'
+}
+
+group = 'ddd'
+version = '0.0.1-SNAPSHOT'
+
+compileTestJava.options.encoding = "UTF-8"
+
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Greenwich.RELEASE")
+//因46 DB版本較舊，無法相容此版本驅動程式
+	set('mysqlVersion', "8.0.28")
+//	set('mysqlVersion', "5.1.27")
+	set('fastjsonVersion',"1.2.62")
+	set('aggregatePersistenceVersion',"1.0.0")
+	set('jetbrainsAnnotationsVersion',"16.0.2")
+	set('feignVersion',"1.4.0.RELEASE")
+
+
+
+
+}
+
+tasks.bootJar {
+	archiveFileName.set("ccbs-iqws-bcrm-service.jar")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+	implementation "org.springframework.cloud:spring-cloud-starter-feign:${feignVersion}"
+
+	implementation "com.github.meixuesong:aggregate-persistence:${aggregatePersistenceVersion}"
+	implementation "com.alibaba:fastjson:${fastjsonVersion}"
+
+	runtimeOnly "mysql:mysql-connector-java:${mysqlVersion}"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
+
+}
+
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+
+test {
+	useJUnitPlatform()
+}
+
+bootJar {
+	enabled = true
+}
