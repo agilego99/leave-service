@@ -33,7 +33,7 @@ spring:
         jdbc:
           batch_size: 1000
         temp:
-          use_jdbc_metadata_defaults: fase
+          use_jdbc_metadata_defaults: false
     show-sql: false
     # MysqlDialect是比較早的配置,如果專案使用的是MySQL 5,最好使用MySQL5Dialect(不加此行導致資料庫無法建立表格)
     # 在 Hibernate 5.x 和更早版本中——方言org.hibernate.dialect.MySQLDialect適用於 MySQL 4.x 或更早版本。TYPE=MYISAM此方言生成的片段在 MySQL 4.0 中已棄用，並在 5.5 中刪除
@@ -67,7 +67,7 @@ spring:
         jdbc:
           batch_size: 1000
         temp:
-          use_jdbc_metadata_defaults: fase
+          use_jdbc_metadata_defaults: false
     show-sql: false
     #MysqlDialect是比較早的配置,如果專案使用的是MySQL 5,最好使用MySQL5Dialect(不加此行導致資料庫無法建立表格)
     database-platform: org.hibernate.dialect.MySQL5Dialect
